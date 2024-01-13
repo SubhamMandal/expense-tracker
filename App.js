@@ -27,6 +27,6 @@ export const router = createBrowserRouter([
     },
     {
         path: 'add-expense',
-        element: <Layout><AddExpense /></Layout>,
+        element: <Layout hasBack={true}><AddExpense /></Layout>,
     }
 ]) 
