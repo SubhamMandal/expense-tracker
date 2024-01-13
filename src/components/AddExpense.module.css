@@ -1,0 +1,48 @@
+.addExpenseForm {
+    max-width: 90vw;
+    margin: auto;
+    padding: 1rem;
+}
+
+.control {
+    display: flex;
+    align-items: center;
+}
+
+.control > span{
+    font-size: 2rem;
+    color: var(--color1);
+}
+
+.button {
+    padding: 0.5em 1.7em;
+    margin: 0 0.1em 0.1em 0;
+    border: 0.16em solid rgb(255, 255, 255);
+    border-radius: 2em;
+    font-weight: 700;
+    color: var(--color1);
+    text-align: center;
+    transition: all 0.2s;
+    font-weight: bolder;
+    margin-top: .5rem;
+    float: right;
+    font-size: 1.2rem;
+    box-shadow: 1px 1px 2px black inset;
+  }
+  
+  .button:hover {
+    cursor: pointer;
+    box-shadow: 2px 2px 4px black inset;
+  }
+
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    background-position: right;
+    background-size: auto;
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    width: auto;
+}

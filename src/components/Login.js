@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import classes from './Login.module.css';
-import Popup from '../utils/Popup';
 import Input from '../utils/Input';
 
 const Login = () => {
