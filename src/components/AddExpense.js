@@ -2,31 +2,59 @@ import React, { useState } from 'react';
 import classes from './AddExpense.module.css';
 import Input from '../utils/Input';
 
-const todayDate = `${new Date().getFullYear()}-0${new Date().getMonth() + 1}-${new Date().getDate()}`;
+const today = new Date();
+const todayDate = `${today.getFullYear()}-${today.getMonth() < 9 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate()}`;
+const tags = ['Uncatagorised', 'Outing', 'Food', 'Grosyries', 'Rent', 'Investments'];
 const AddExpense = () => {
     const [date, setDate] = useState(todayDate);
-    const chaneDateHandler = (e) => {
+    const [description, setDescription] = useState('');
+    const [amount, setAmount] = useState('');
+    const [type, setType] = useState('Uncatagorised');
+    const onDescriptionChange = (e) => {
+        setDescription(e.target.value);
+    }
+    const onAmountChange = (e) => {
+        setAmount(e.target.value);
+    }
+    const onDateChange = (e) => {
         setDate(e.target.value);
+    }
+    const onTypeChange = (e) => {
+        setType(e.target.value);
     }
     const addExpenseHandler = (e) => {
         e.preventDefault();
+        console.log('Expense added -> ', {
+            description: description,
+            amount: amount,
+            date: date,
+            type: type
+        })
     }
     return (
         <section>
             <form onSubmit={addExpenseHandler} className={classes.addExpenseForm}>
                 <div className={classes.control}>
                     <span className="material-symbols-outlined">description</span>
-                    <Input id="desc" label="Description" />
+                    <Input id="desc" value={description} onChange={onDescriptionChange} label="Description" />
                 </div>
                 <div className={classes.control}>
                     <span className="material-symbols-outlined">currency_rupee</span>
-                    <Input id="amt" label="Amount" type="number" />
+                    <Input id="amt" label="Amount" value={amount} onChange={onAmountChange} type="number" />
                 </div>
                 <div className={classes.control}>
                     <span className="material-symbols-outlined">calendar_month</span>
-                    <Input id="date" label="Date" type="date" value={date} onChange={chaneDateHandler} />
+                    <Input id="date" label="Date" type="date" value={date} onChange={onDateChange} />
                 </div>
-                <button type='submit' className={classes.button}>Add</button>
+                <div className={classes.control}>
+                    <button type='submit' className={classes.button}>Add</button>
+                </div>
+                <div className={classes.tags}>
+                    {tags.map((tag, index) => <div className={classes.tag} key={index}>
+                        <input name='tag' id={tag} type='radio' checked={tag === type} value={tag} onChange={onTypeChange} />
+                        <label htmlFor={tag}>{tag}</label>
+                    </div>)}
+                </div>
             </form>
         </section>
     )

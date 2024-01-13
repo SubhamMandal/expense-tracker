@@ -9,6 +9,11 @@
     align-items: center;
 }
 
+.control input {
+  color: gray;
+  font-weight: bold;
+}
+
 .control > span{
     font-size: 2rem;
     color: var(--color1);
@@ -25,7 +30,7 @@
     transition: all 0.2s;
     font-weight: bolder;
     margin-top: .5rem;
-    float: right;
+    margin-left: auto;
     font-size: 1.2rem;
     box-shadow: 1px 1px 2px black inset;
   }
@@ -45,4 +50,28 @@
     right: 0;
     top: 0;
     width: auto;
+}
+
+.tags {
+  margin-top: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+}
+
+.tag {
+  font-size: 1.5rem;
+  color: gray;
+  padding: .5rem 1rem;
+  background-color: var(--color4);
+  border-radius: 1rem;
+  transition: all .5s;
+}
+
+.tag input{
+  display: none;
+}
+
+.tag:has(input:checked) {
+  background-color: var(--color1);
 }
