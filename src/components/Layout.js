@@ -1,7 +1,7 @@
 import React from 'react';
 import Logo from '../static/Images/logo.png';
 import classes from './Layout.module.css';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 
 const Layout = ({ children, hasBack }) => {
     const navigate = useNavigate();
@@ -19,10 +19,18 @@ const Layout = ({ children, hasBack }) => {
             </Link>
             {children}
             <div className={classes.footer}>
-                <span className="material-symbols-outlined">home</span>
-                <span className="material-symbols-outlined">home</span>
-                <span className="material-symbols-outlined">home</span>
-                <span className="material-symbols-outlined">home</span>
+                <NavLink to='/home' className={({ isActive }) => isActive ? classes.active : ''}>
+                    <span className="material-symbols-outlined">home</span>
+                </NavLink>
+                <NavLink to='/groups' className={({ isActive }) => isActive ? classes.active : ''}>
+                    <span class="material-symbols-outlined">groups</span>
+                </NavLink>
+                <NavLink to='/home2' className={({ isActive }) => isActive ? classes.active : ''}>
+                    <span className="material-symbols-outlined">home</span>
+                </NavLink>
+                <NavLink to='/profile' className={({ isActive }) => isActive ? classes.active : ''}>
+                    <span class="material-symbols-outlined">person</span>
+                </NavLink>
             </div>
         </section>
     )
