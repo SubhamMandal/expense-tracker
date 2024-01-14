@@ -40,6 +40,6 @@
 
 .active span{
   transform: scale(1.5);
-  color: var(--color1);
+  color: var(--color2);
   filter: drop-shadow(2px 2px 2px gray);
 }

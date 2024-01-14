@@ -3,13 +3,13 @@ import classes from './AddExpense.module.css';
 import Input from '../utils/Input';
 
 const today = new Date();
-const todayDate = `${today.getFullYear()}-${today.getMonth() < 9 ? '0' + (today.getMonth() + 1) : today.getMonth() + 1}-${today.getDate()}`;
+const todayDate = new Date().toISOString().slice(0, 10);
 const tags = ['Uncatagorised', 'Outing', 'Food', 'Grosyries', 'Rent', 'Investments'];
 const AddExpense = () => {
     const [date, setDate] = useState(todayDate);
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
-    const [type, setType] = useState('Uncatagorised');
+    const [type, setType] = useState(tags[0]);
     const onDescriptionChange = (e) => {
         setDescription(e.target.value);
     }

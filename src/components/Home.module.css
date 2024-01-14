@@ -1,3 +1,28 @@
+.total {
+    font-size: 2rem;
+    margin: auto;
+    margin-top: 1rem;
+    color: gray;
+    width: fit-content;
+}
+
+.total div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 7rem;
+    margin: auto;
+    border-radius: 50%;
+    height: 7rem;
+    padding: 1rem;
+    background-color: var(--color4);
+}
+
+.total span {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
 .addExpense {
     position: fixed;
     bottom: 6rem;

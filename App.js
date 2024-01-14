@@ -3,12 +3,14 @@ import Login from "./src/components/Login"
 import Home from "./src/components/Home";
 import AddExpense from "./src/components/AddExpense";
 import Layout from "./src/components/Layout";
+import { useContext } from "react";
+import AuthContext from "./src/store/AuthContext";
 
 const App = () => {
+    const authCtx = useContext(AuthContext);
     return (
         <>
-            {/* <Home /> */}
-            <Login />
+            {authCtx.isLoggedIn ? <Layout><Home /></Layout> : <Login />}
         </>
     );
 }
