@@ -1,0 +1,64 @@
+.notification {
+    position: absolute;
+    top: 3rem;
+    right: 1rem;
+    max-height: 100%;
+    overflow: hidden;
+  }
+  
+  .toast {
+    margin-bottom: 0.5rem;
+    padding: 0.2rem 0.5rem;
+    opacity: 0.6;
+    border-radius: 4px;
+    width: 16rem;
+    color: aliceblue;
+    cursor: context-menu;
+    animation: toast 100ms ease-out;
+  }
+
+  .success {
+    background-color: rgb(82, 191, 82);
+  }
+
+  .fail {
+    background-color: rgb(247, 84, 84);
+  }
+  
+  @keyframes toast {
+      from{
+          transform: translateX(16rem)
+      }
+      to {
+          transform: translateX(0);
+      }
+  }
+  
+  .toast:hover {
+    /* opacity: 1; */
+    box-shadow: 10px 5px 5px rgb(148, 148, 148);
+  }
+  
+  .title {
+    font-weight: bold;
+    color: var(--color1);
+  }
+  
+  .message {
+      color: white;
+  }
+  
+  .close {
+    position: absolute;
+    right: 0.5rem;
+    float: right;
+    cursor: pointer;
+    border-radius: 50%;
+    padding: 0.2rem;
+  }
+  
+  .close:hover {
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+  }
+  

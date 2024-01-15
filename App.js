@@ -6,11 +6,13 @@ import Layout from "./src/components/Layout";
 import { useContext } from "react";
 import AuthContext from "./src/store/AuthContext";
 import Profile from "./src/components/Profile";
+import Notification from "./src/utils/Notification";
 
 const App = () => {
     const authCtx = useContext(AuthContext);
     return (
         <>
+            <Notification />
             {authCtx.isLoggedIn ? <Layout><Home /></Layout> : <Login />}
         </>
     );

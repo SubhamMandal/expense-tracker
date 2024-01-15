@@ -4,6 +4,7 @@ import Input from '../utils/Input';
 import useHttp from '../hooks/use-http';
 import { loginUser, signUpUser } from '../lib/api';
 import AuthContext from '../store/AuthContext';
+import NotificationContext from '../store/NotificationContext';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -14,6 +15,7 @@ const Login = () => {
     const requestType = isLogin ? loginUser : signUpUser;
     const { sendRequest, data, status, error } = useHttp(requestType);
     const authCtx = useContext(AuthContext);
+    const notificationCtx = useContext(NotificationContext);
 
     const usernameInputHandler = (e) => {
         setUsername(e.target.value);
@@ -53,7 +55,10 @@ const Login = () => {
                 setIsLogin(true);
                 setPassword('');
                 setCnfPwd('');
+                notificationCtx.addNotification({ type: 'success', message: 'User signed-up successfully!' })
             }
+        } else if (error) {
+            notificationCtx.addNotification({type: 'fail', message: error});
         }
     }, [error, status]);
 
