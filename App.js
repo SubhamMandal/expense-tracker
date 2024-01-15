@@ -5,6 +5,7 @@ import AddExpense from "./src/components/AddExpense";
 import Layout from "./src/components/Layout";
 import { useContext } from "react";
 import AuthContext from "./src/store/AuthContext";
+import Profile from "./src/components/Profile";
 
 const App = () => {
     const authCtx = useContext(AuthContext);
@@ -33,7 +34,7 @@ export const router = createBrowserRouter([
     },
     {
         path: 'profile',
-        element: <Layout hasBack={true}><div>Profile</div></Layout>,
+        element: <Layout hasBack={true}><Profile /></Layout>,
     },
     {
         path: 'groups',

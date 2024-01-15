@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import classes from './AddExpense.module.css';
 import Input from '../utils/Input';
+import useHttp from '../hooks/use-http';
+import { addExpense } from '../lib/api';
 
 const today = new Date();
 const todayDate = new Date().toISOString().slice(0, 10);
@@ -10,6 +12,8 @@ const AddExpense = () => {
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const [type, setType] = useState(tags[0]);
+    const {sendRequest, data, error, status} = useHttp(addExpense);
+
     const onDescriptionChange = (e) => {
         setDescription(e.target.value);
     }
@@ -24,13 +28,23 @@ const AddExpense = () => {
     }
     const addExpenseHandler = (e) => {
         e.preventDefault();
-        console.log('Expense added -> ', {
+        const expenseData = {
             description: description,
             amount: amount,
             date: date,
             type: type
-        })
+        }
+        console.log('Expense added -> ', )
+        sendRequest(expenseData, true);
     }
+
+    useEffect(() => {
+        if (!error && status === 'completed') {
+            console.log(data);
+        } else {
+            console.log(error);
+        }
+    }, [error, data, status]);
     return (
         <section>
             <form onSubmit={addExpenseHandler} className={classes.addExpenseForm}>

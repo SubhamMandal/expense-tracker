@@ -44,3 +44,26 @@ export async function loginUser(userData) {
     return data;
 }
 
+export async function addExpense(expenseDetails) {
+    let response;
+    try {
+        response = await fetch(`${BASE_URL}/expense/add-expense`, {
+            method: 'POST',
+            body: JSON.stringify(expenseDetails),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': document.cookie.split('=')[1],
+            },
+        });
+    } catch (err) {
+        throw new Error('Network Error');
+    }
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Expense could not be added');
+    }
+
+    return data;
+}
+
