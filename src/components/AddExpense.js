@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import classes from './AddExpense.module.css';
 import Input from '../utils/Input';
 import useHttp from '../hooks/use-http';
 import { addExpense } from '../lib/api';
+import NotificationContext from '../store/NotificationContext';
 
 const today = new Date();
 const todayDate = new Date().toISOString().slice(0, 10);
@@ -12,7 +13,8 @@ const AddExpense = () => {
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
     const [type, setType] = useState(tags[0]);
-    const {sendRequest, data, error, status} = useHttp(addExpense);
+    const { sendRequest, data, error, status } = useHttp(addExpense);
+    const notificationCtx = useContext(NotificationContext);
 
     const onDescriptionChange = (e) => {
         setDescription(e.target.value);
@@ -34,13 +36,17 @@ const AddExpense = () => {
             date: date,
             type: type
         }
-        console.log('Expense added -> ', )
+        console.log('Expense added -> ', expenseData)
         sendRequest(expenseData, true);
     }
 
     useEffect(() => {
         if (!error && status === 'completed') {
             console.log(data);
+            notificationCtx.addNotification({ type: 'success', message: 'Expense added successfully' });
+            setAmount('');
+            setDescription('');
+            setType(tags[0]);
         } else {
             console.log(error);
         }

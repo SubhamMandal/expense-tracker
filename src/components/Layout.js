@@ -3,6 +3,7 @@ import Logo from '../static/Images/logo.png';
 import classes from './Layout.module.css';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import ProtectedRoute from '../utils/ProtectedRoute';
+import Notification from '../utils/Notification';
 
 const Layout = ({ children, hasBack }) => {
     const navigate = useNavigate();
@@ -11,6 +12,7 @@ const Layout = ({ children, hasBack }) => {
     }
     return (
         <ProtectedRoute>
+            <Notification />
             <section className={classes.home}>
                 <Link to='/home' className={classes.header}>
                     <img className={classes.logo} src={Logo} />
