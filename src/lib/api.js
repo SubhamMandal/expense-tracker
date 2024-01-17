@@ -67,3 +67,24 @@ export async function addExpense(expenseDetails) {
     return data;
 }
 
+export async function getAllExpense() {
+    let response;
+    try {
+        response = await fetch(`${BASE_URL}/expense/all-expense`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': document.cookie.split('=')[1],
+            },
+        });
+    } catch (err) {
+        throw new Error(err || 'Network Error');
+    }
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Could not fetch expenses');
+    }
+
+    return data;
+}

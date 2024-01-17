@@ -1,0 +1,97 @@
+.table {
+  display: grid;
+  width: 100%;
+  border-radius: 1rem;
+  color: gray;
+}
+
+.headers {
+  display: flex;
+  width: 100%;
+  background-color: var(--color1);
+  padding: 1rem 0;
+}
+
+.tableHeader {
+  text-align: center;
+  width: 25%;
+  font-size: 1.2rem;
+}
+
+.tbody {
+  margin-top: .25rem;
+  padding: 0 .5rem;
+  height: 85vh;
+  overflow-y: scroll;
+  /* background-color: aqua; */
+}
+
+.row {
+  display: flex;
+  width: 100%;
+  /* border-radius: 5px; */
+  align-items: center;
+  border-bottom: 1px solid rgb(222, 214, 214);
+  justify-content: space-between;
+  color: gray;
+}
+
+.cell {
+  width: 25%;
+  text-align: center;
+  overflow: hidden;
+  padding: .5rem 0;
+  text-overflow: ellipsis;
+}
+
+.date {
+  width: 10%;
+  /* background-color: brown; */
+}
+
+.description {
+  width: 50%;
+  text-align: start;
+  font-size: 1.5rem;
+  margin-left: .5rem;
+  /* background-color: blue; */
+}
+
+.amount {
+  width: 20%;
+  font-size: 1.5rem;
+  display: flex;
+  align-items: center;
+  /* background-color: aqua; */
+  /* color: rgb(116, 88, 255); */
+}
+
+.amount span {
+  color: gray;
+}
+
+.noExpense {
+  font-size: 1.5rem;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.addExpense {
+  font-size: 1rem;
+  width: fit-content;
+  margin: 2rem auto;
+  background-color: var(--color1);
+  padding: 1rem;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 5px 5px 4px gray;
+  cursor: pointer;
+  color: black;
+}
+
+.addExpense > span {
+  margin-right: .3rem;
+  font-size: 2rem;
+}

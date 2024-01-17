@@ -7,6 +7,7 @@ import { useContext } from "react";
 import AuthContext from "./src/store/AuthContext";
 import Profile from "./src/components/Profile";
 import Notification from "./src/utils/Notification";
+import Transactions from "./src/components/Transactions";
 
 const App = () => {
     const authCtx = useContext(AuthContext);
@@ -41,5 +42,9 @@ export const router = createBrowserRouter([
     {
         path: 'groups',
         element: <Layout hasBack={true}><div>Groups</div></Layout>,
+    },
+    {
+        path: 'transactions',
+        element: <Layout hasBack={true}><Transactions /></Layout>,
     }
 ]) 

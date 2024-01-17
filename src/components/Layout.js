@@ -29,8 +29,8 @@ const Layout = ({ children, hasBack }) => {
                     <NavLink to='/groups' className={({ isActive }) => isActive ? classes.active : ''}>
                         <span className="material-symbols-outlined">groups</span>
                     </NavLink>
-                    <NavLink to='/home2' className={({ isActive }) => isActive ? classes.active : ''}>
-                        <span className="material-symbols-outlined">home</span>
+                    <NavLink to='/transactions' className={({ isActive }) => isActive ? classes.active : ''}>
+                        <span className="material-symbols-outlined">history</span>
                     </NavLink>
                     <NavLink to='/profile' className={({ isActive }) => isActive ? classes.active : ''}>
                         <span className="material-symbols-outlined">person</span>
