@@ -1,0 +1,51 @@
+.addGroupBtn {
+    position: fixed;
+    bottom: 6rem;
+    right: 1.5rem;
+    background-color: var(--color1);
+    padding: 1rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 5px 5px 4px gray;
+    cursor: pointer;
+    color: black;
+}
+
+.addGroupBtn > span {
+    margin-right: .3rem;
+    font-size: 2rem;
+}
+
+  .groups {
+    display: flex;
+    width: 100%;
+    margin-top: 2rem;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .group {
+    display: flex;
+    margin-bottom: 1rem;
+    width: 90%;
+    padding: .5rem;
+    border-radius: .5rem;
+    align-items: center;
+    font-size: 1.5rem;
+    box-shadow: 5px 5px 10px gray;
+    cursor: pointer;
+  }
+
+  .group span {
+    font-size: 5rem;
+    color: gray;
+    margin-right: .5rem;
+  }
+
+  .groupName + div {
+    font-size: 1rem;
+    color: gray;
+  }

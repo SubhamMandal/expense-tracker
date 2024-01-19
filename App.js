@@ -8,6 +8,7 @@ import AuthContext from "./src/store/AuthContext";
 import Profile from "./src/components/Profile";
 import Notification from "./src/utils/Notification";
 import Transactions from "./src/components/Transactions";
+import Groups from "./src/components/Groups";
 
 const App = () => {
     const authCtx = useContext(AuthContext);
@@ -41,10 +42,14 @@ export const router = createBrowserRouter([
     },
     {
         path: 'groups',
-        element: <Layout hasBack={true}><div>Groups</div></Layout>,
+        element: <Layout hasBack={true}><Groups /></Layout>,
     },
     {
         path: 'transactions',
         element: <Layout hasBack={true}><Transactions /></Layout>,
+    },
+    {
+        path: 'transactions/:expenseId',
+        element: <Layout hasBack={true}><div>expense details</div></Layout>
     }
 ]) 

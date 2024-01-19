@@ -88,3 +88,48 @@ export async function getAllExpense() {
 
     return data;
 }
+
+export async function addGroup(groupDetails) {
+    let response;
+    try {
+        response = await fetch(`${BASE_URL}/group/add-group`, {
+            method: 'POST',
+            body: JSON.stringify(groupDetails),
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': document.cookie.split('=')[1],
+            },
+        });
+    } catch (err) {
+        throw new Error(err || 'Network Error');
+    }
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Group could not be added');
+    }
+
+    return data;
+}
+
+export async function getUserGroups() {
+    let response;
+    try {
+        response = await fetch(`${BASE_URL}/group/user-groups`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': document.cookie.split('=')[1],
+            },
+        });
+    } catch (err) {
+        throw new Error(err || 'Network Error');
+    }
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Could not fetch group');
+    }
+
+    return data;
+}

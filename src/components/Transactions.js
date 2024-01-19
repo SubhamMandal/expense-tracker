@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useHttp from '../hooks/use-http';
 import { getAllExpense } from '../lib/api';
 import classes from './Transactions.module.css';
@@ -14,9 +14,14 @@ const processDate = (fullDate) => {
     return <div>{month} <div style={{ fontSize: '1.75rem' }}>{date}</div></div>
 }
 
+const filterExpense = () => {
+
+}
+
 const Transactions = () => {
     const notificationCtx = useContext(NotificationContext);
     const { sendRequest, error, data, status } = useHttp(getAllExpense);
+    const [filteredExpenses, setFilteredExpenses] = useState([]);
     useEffect(() => {
         sendRequest();
     }, [])
@@ -24,14 +29,25 @@ const Transactions = () => {
     useEffect(() => {
         if (error) {
             notificationCtx.addNotification({ type: 'fail', message: error })
+        } else if (data) {
+            setFilteredExpenses(data.allExpense)
         }
-    }, [error])
+    }, [error, data])
 
-    console.log(data)
+    console.log(filteredExpenses)
+    if (error) {
+        return <div>{error}</div>;
+    }
     return (
         <section>
-            {error && <div>{error}</div>}
-            {!data?.allExpense.length ?
+            <div className={classes.controls}></div>
+            <label>filter</label>
+            <select className={classes.dropdown}>
+                <option>option1</option>
+                <option>option2</option>
+                <option>option3</option>
+            </select>
+            {!filteredExpenses.length ?
                 <div className={classes.noExpense}>
                     No Expense to show
                     <Link to='/add-expense' className={classes.addExpense} >
@@ -41,7 +57,7 @@ const Transactions = () => {
                 </div> :
                 <div className={classes.table}>
                     <div className={classes.tbody}>
-                        {data?.allExpense.map(expense => <Link to={expense._id} key={expense._id} className={classes.row}>
+                        {filteredExpenses.map(expense => <Link to={expense._id} key={expense._id} className={classes.row}>
                             <div className={`${classes.cell} ${classes.date}`} >{processDate(expense.date)}</div>
                             <div className={`${classes.cell} ${classes.description}`} >{expense.description}</div>
                             <div className={`${classes.cell} ${classes.amount}`} ><span className="material-symbols-outlined">currency_rupee</span>{expense.amount}</div>

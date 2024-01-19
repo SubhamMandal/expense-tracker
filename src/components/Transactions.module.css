@@ -1,4 +1,5 @@
 .table {
+  /* margin-top: 15rem; */
   display: grid;
   width: 100%;
   border-radius: 1rem;
@@ -19,9 +20,9 @@
 }
 
 .tbody {
-  margin-top: .25rem;
-  padding: 0 .5rem;
-  height: 85vh;
+  margin-top: 0.25rem;
+  padding: 0 0.5rem;
+  height: 55vh;
   overflow-y: scroll;
   /* background-color: aqua; */
 }
@@ -40,7 +41,7 @@
   width: 25%;
   text-align: center;
   overflow: hidden;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   text-overflow: ellipsis;
 }
 
@@ -53,7 +54,7 @@
   width: 50%;
   text-align: start;
   font-size: 1.5rem;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
   /* background-color: blue; */
 }
 
@@ -92,6 +93,28 @@
 }
 
 .addExpense > span {
-  margin-right: .3rem;
+  margin-right: 0.3rem;
   font-size: 2rem;
+}
+
+.controls {
+  display: flex;
+  padding: 1rem;
+  justify-content: space-evenly;
+}
+
+.dropdown {
+  background-color: white;
+  border: thin solid blue;
+  border-radius: 4px;
+  display: inline-block;
+  font: inherit;
+  line-height: 1.5em;
+  padding: 0.5em 3.5em 0.5em 1em;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-appearance: none;
+  -moz-appearance: none;
 }
