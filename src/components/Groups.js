@@ -4,6 +4,7 @@ import useHttp from '../hooks/use-http';
 import { getUserGroups } from '../lib/api';
 import { iconColor, iconPicture } from '../static/constants';
 import AddGroup from './AddGroup';
+import { Link } from 'react-router-dom';
 
 const Groups = () => {
     const [addGroup, setAddGroup] = useState(false);
@@ -13,7 +14,6 @@ const Groups = () => {
     useEffect(() => {
         sendRequest();
     }, []);
-    console.log({ data })
 
     useEffect(() => {
         if (data?.userGroups) {
@@ -46,7 +46,7 @@ export default Groups;
 
 const Group = ({ group }) => {
     return (
-        <div className={classes.group}>
+        <Link to={group._id} className={classes.group}>
             <span
                 style={{ color: iconColor[group.category] }}
                 className="material-symbols-outlined">{iconPicture[group.category]}</span>
@@ -54,6 +54,6 @@ const Group = ({ group }) => {
                 <div className={classes.groupName}>{group.name}</div>
                 <div>Setteled up</div>
             </div>
-        </div>
+        </Link>
     );
 }

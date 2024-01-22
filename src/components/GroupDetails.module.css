@@ -1,0 +1,19 @@
+.addMembers {
+    position: fixed;
+    bottom: 6rem;
+    right: 1.5rem;
+    background-color: var(--color1);
+    padding: 1rem;
+    border-radius: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: 5px 5px 4px gray;
+    cursor: pointer;
+    color: black;
+}
+
+.addMembers > span {
+    margin-right: .3rem;
+    font-size: 2rem;
+}

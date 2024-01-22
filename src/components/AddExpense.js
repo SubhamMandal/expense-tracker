@@ -4,11 +4,13 @@ import Input from '../utils/Input';
 import useHttp from '../hooks/use-http';
 import { addExpense } from '../lib/api';
 import NotificationContext from '../store/NotificationContext';
+import { useLocation } from 'react-router-dom';
 
-const today = new Date();
 const todayDate = new Date().toISOString().slice(0, 10);
 const tags = ['Uncatagorised', 'Outing', 'Food', 'Grosyries', 'Rent', 'Investments'];
 const AddExpense = () => {
+    const { state } = useLocation()
+    const {groupId, groupName} = state;
     const [date, setDate] = useState(todayDate);
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
@@ -34,7 +36,8 @@ const AddExpense = () => {
             description: description,
             amount: amount,
             date: date,
-            type: type
+            type: type,
+            group: groupId
         }
         console.log('Expense added -> ', expenseData)
         sendRequest(expenseData, true);
@@ -54,6 +57,7 @@ const AddExpense = () => {
     return (
         <section>
             <form onSubmit={addExpenseHandler} className={classes.addExpenseForm}>
+                    <div>group: {groupName}</div>
                 <div className={classes.control}>
                     <span className="material-symbols-outlined">description</span>
                     <Input id="desc" value={description} onChange={onDescriptionChange} label="Description" />

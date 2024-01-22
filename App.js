@@ -9,6 +9,7 @@ import Profile from "./src/components/Profile";
 import Notification from "./src/utils/Notification";
 import Transactions from "./src/components/Transactions";
 import Groups from "./src/components/Groups";
+import GroupDetails from "./src/components/GroupDetails";
 
 const App = () => {
     const authCtx = useContext(AuthContext);
@@ -43,6 +44,10 @@ export const router = createBrowserRouter([
     {
         path: 'groups',
         element: <Layout hasBack={true}><Groups /></Layout>,
+    },
+    {
+        path: 'groups/:groupId',
+        element: <Layout hasBack={true}><GroupDetails /></Layout>,
     },
     {
         path: 'transactions',
