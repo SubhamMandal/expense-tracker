@@ -9,6 +9,8 @@ const AuthContext = createContext({
     updateUser: () => { },
 });
 
+let logoutTimeout;
+
 const calculateRemainingDuration = (expirationTime) => {
     const currentTime = new Date().getTime();
     const adjExpirationTime = new Date(expirationTime).getTime();
