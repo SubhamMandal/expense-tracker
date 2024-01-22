@@ -10,7 +10,7 @@ const todayDate = new Date().toISOString().slice(0, 10);
 const tags = ['Uncatagorised', 'Outing', 'Food', 'Grosyries', 'Rent', 'Investments'];
 const AddExpense = () => {
     const { state } = useLocation()
-    const {groupId, groupName} = state;
+    const { groupId, groupName } = state || {};
     const [date, setDate] = useState(todayDate);
     const [description, setDescription] = useState('');
     const [amount, setAmount] = useState('');
@@ -57,7 +57,7 @@ const AddExpense = () => {
     return (
         <section>
             <form onSubmit={addExpenseHandler} className={classes.addExpenseForm}>
-                    <div>group: {groupName}</div>
+                <div>group: {groupName}</div>
                 <div className={classes.control}>
                     <span className="material-symbols-outlined">description</span>
                     <Input id="desc" value={description} onChange={onDescriptionChange} label="Description" />
