@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:8080';
+export const BASE_URL = process.env.BASE_URL || 'http://localhost:8080';
 
 export const categories = [
     { iconName: "house", category: "Home" },

@@ -23,6 +23,7 @@ export async function signUpUser(userData) {
 }
 
 export async function loginUser(userData) {
+    console.log({BASE_URL})
     let response;
     try {
         response = await fetch(`${BASE_URL}/users/login`, {
