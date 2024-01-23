@@ -12,9 +12,9 @@ import classes from './JoinGroup.module.css';
 const JoinGroup = () => {
     const authCtx = useContext(AuthContext);
     const { sendRequest, data: groupDetails } = useHttp(getGroup);
-    const { sendRequest: join, data: joinGroupData, error, status } = useHttp(joinGroupApi);
+    const { sendRequest: join, data: joinGroupData, error, status: joinStatus } = useHttp(joinGroupApi);
     const [groupData, setGroupData] = useState({});
-    const [joinGroup, setJoinGroup] = useState(false);
+    // const [joinGroup, setJoinGroup] = useState(false);
     const { groupId } = useParams();
     const navigate = useNavigate();
     const notificationCtx = useContext(NotificationContext);
@@ -36,11 +36,11 @@ const JoinGroup = () => {
         }
     }, [error])
 
-    useEffect(() => {
-        if (authCtx.isLoggedIn && joinGroup) {
-            join(groupId);
-        }
-    }, [authCtx.isLoggedIn, joinGroup]);
+    // useEffect(() => {
+    //     if (authCtx.isLoggedIn && joinGroup) {
+    //         join(groupId);
+    //     }
+    // }, [authCtx.isLoggedIn, joinGroup]);
 
     useEffect(() => {
         if (groupDetails?.groupDetails) {
@@ -49,15 +49,16 @@ const JoinGroup = () => {
     }, [groupDetails])
 
     const joinButtonHandler = () => {
-        setJoinGroup(true);
-        setTimeout(() => { setJoinGroup(false) }, 5000);
+        join(groupId);
+        // setJoinGroup(true);
+        // setTimeout(() => { setJoinGroup(false) }, 5000);
     }
 
     return (
         <div>
             {authCtx.isLoggedIn ? <Layout>
                 {groupData.name}
-                <div onClick={joinButtonHandler} className={`${classes.joinGroupBtn} ${joinGroup && classes.clicked}`}>Join Group</div>
+                <div onClick={joinButtonHandler} className={`${classes.joinGroupBtn} ${joinStatus === 'pending' && classes.clicked}`}>Join Group</div>
             </Layout> :
                 <div>
                     <div>Please Login to join group</div>

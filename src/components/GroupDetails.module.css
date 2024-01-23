@@ -97,3 +97,64 @@
 .btn.copied {
     box-shadow: 2px 2px 4px gray inset;
 }
+
+.table {
+    /* margin-top: 15rem; */
+    display: grid;
+    width: 100%;
+    border-radius: 1rem;
+    color: gray;
+  }
+
+.tbody {
+    margin-top: 0.25rem;
+    padding: 0 0.5rem;
+    height: 55vh;
+    overflow-y: scroll;
+    /* background-color: aqua; */
+  }
+  
+  .row {
+    display: flex;
+    width: 100%;
+    /* border-radius: 5px; */
+    align-items: center;
+    border-bottom: 1px solid rgb(222, 214, 214);
+    justify-content: space-between;
+    color: gray;
+  }
+  
+  .cell {
+    width: 25%;
+    text-align: center;
+    overflow: hidden;
+    padding: 0.5rem 0;
+    text-overflow: ellipsis;
+  }
+  
+  .date {
+    width: 10%;
+    /* background-color: brown; */
+  }
+  
+  .description {
+    width: 50%;
+    text-align: start;
+    font-size: 1.5rem;
+    margin-left: 0.5rem;
+    /* background-color: blue; */
+  }
+  
+  .amount {
+    width: 20%;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    /* background-color: aqua; */
+    /* color: rgb(116, 88, 255); */
+  }
+  
+  .amount span {
+    color: gray;
+  }
+  

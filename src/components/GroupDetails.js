@@ -1,28 +1,46 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import useHttp from '../hooks/use-http';
-import { getGroup } from '../lib/api';
+import { getGroup, getGroupExpenses as getExpeses } from '../lib/api';
 import { BASE_URL, iconColor, iconPicture } from '../static/constants';
 
 import classes from './GroupDetails.module.css';
 import Popup from '../utils/Popup';
 
+const monthText = { '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr' }
+
+const processDate = (fullDate) => {
+    const date = fullDate.split('-')[2];
+    const month = monthText[fullDate.split('-')[1]];
+    // return `${month} ${date}`;
+    return <div>{month} <div style={{ fontSize: '1.75rem' }}>{date}</div></div>
+}
+
 const GroupDetails = () => {
     const navigate = useNavigate();
     const { groupId } = useParams();
     const { sendRequest, data, error, status } = useHttp(getGroup);
+    const { sendRequest: getGroupExpenses,
+        data: groupExpenseData,
+        error: groupExpenseError,
+        status: groupExpenseStatus } = useHttp(getExpeses);
     const [groupData, setGroupData] = useState({});
     const [addMember, setAddMember] = useState(false);
+    const [expenses, setExpenses] = useState([]);
 
     useEffect(() => {
         sendRequest(groupId);
+        getGroupExpenses(groupId);
     }, []);
 
     useEffect(() => {
         if (data) {
             setGroupData(data.groupDetails);
         }
-    }, [data])
+        if (groupExpenseData) {
+            setExpenses(groupExpenseData.expenses || []);
+        }
+    }, [data, groupExpenseData])
 
     return (
         <div>
@@ -35,6 +53,16 @@ const GroupDetails = () => {
                 <div>Settle up</div>
                 <div>Balances</div>
                 <div>Total</div>
+            </div>
+            <div className={classes.table}>
+                <div className={classes.tbody}>
+                    {expenses.map(expense => <Link to={`/transactions/${expense._id}`} key={expense._id} className={classes.row}>
+                        <div className={`${classes.cell} ${classes.date}`} >{processDate(expense.date)}</div>
+                        <div className={`${classes.cell} ${classes.description}`} >{expense.description}</div>
+                        <div className={`${classes.cell} ${classes.amount}`} ><span className="material-symbols-outlined">currency_rupee</span>{expense.amount}</div>
+                        {/* <div className={classes.cell} >{expense.catagory}</div> */}
+                    </Link>)}
+                </div>
             </div>
             {groupData?.members?.length > 1 && <div onClick={() => navigate('/add-expense', {
                 state: { groupId, groupName: groupData.name }
