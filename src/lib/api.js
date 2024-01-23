@@ -156,3 +156,25 @@ export async function getGroup(groupId) {
 
     return data;
 }
+
+export async function joinGroup(groupId) {
+    let response;
+    try {
+        response = await fetch(`${BASE_URL}/group/join/${groupId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': document.cookie.split('=')[1],
+            },
+        });
+    } catch (err) {
+        throw new Error(err || 'Network Error');
+    }
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Could not join group');
+    }
+
+    return data;
+}

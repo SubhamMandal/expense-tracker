@@ -1,19 +1,99 @@
-.addMembers {
-    position: fixed;
-    bottom: 6rem;
-    right: 1.5rem;
-    background-color: var(--color1);
-    padding: 1rem;
-    border-radius: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    box-shadow: 5px 5px 4px gray;
-    cursor: pointer;
-    color: black;
+.addExpense {
+  position: fixed;
+  bottom: 6rem;
+  right: 1.5rem;
+  background-color: var(--color1);
+  padding: 1rem;
+  border-radius: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  box-shadow: 5px 5px 4px gray;
+  cursor: pointer;
+  color: black;
 }
 
-.addMembers > span {
-    margin-right: .3rem;
-    font-size: 2rem;
+.addExpense > span {
+  margin-right: 0.3rem;
+  font-size: 2rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  /* background-color: rgba(176, 163, 163, 0.484); */
+  font-family: "Rubik", sans-serif;
+  padding: 0.5rem;
+  color: gray;
+  /* border-radius: 1rem; */
+  /* margin-top: 1rem;
+    box-shadow: 10px 10px 10px gray; */
+}
+
+.header span:first-child {
+  font-size: 4rem;
+  margin-right: 1rem;
+  /* background-color: rgba(130, 203, 130, 0.438); */
+  border-radius: 1rem;
+}
+
+.header span:last-child {
+  margin-left: auto;
+  /* margin-right: 1rem; */
+  color: gray;
+}
+
+.controls {
+  display: flex;
+  /* justify-content: space-evenly; */
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid gray;
+}
+
+.controls div {
+  background-color: var(--color4);
+  width: 30%;
+  text-align: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.addMembers {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: var(--color3);
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 2px 2px 4px gray;
+  cursor: pointer;
+}
+
+.joinLink {
+    width: 75vw;
+    /* background-color: rgb(95, 214, 238); */
+    overflow-wrap: break-word;
+    display: block;
+    padding: .5rem;
+    border: 2px solid gray;
+}
+
+.btn {
+    background-color: var(--color1);
+    width: 5rem;
+    border-radius: .3rem;
+    margin: auto;
+    margin-top: 1rem;
+    padding: .5rem;
+    box-shadow: 2px 2px 4px gray;
+    transition: all .5s;
+    text-align: center;
+    cursor: pointer;
+}
+
+.btn.copied {
+    box-shadow: 2px 2px 4px gray inset;
 }
