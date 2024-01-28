@@ -35,7 +35,7 @@ const GroupDetails = () => {
 
     useEffect(() => {
         if (data) {
-            setGroupData(data.groupDetails);
+            setGroupData(data?.groupDetails);
         }
         if (groupExpenseData) {
             setExpenses(groupExpenseData.expenses || []);
@@ -65,7 +65,7 @@ const GroupDetails = () => {
                 </div>
             </div>
             {groupData?.members?.length > 1 && <div onClick={() => navigate('/add-expense', {
-                state: { groupId, groupName: groupData.name }
+                state: { groupId, groupName: groupData.name, groupMembers: groupData.members }
             })} className={classes.addExpense} >
                 <span className="material-symbols-outlined">add_notes</span>
                 Add Expense
