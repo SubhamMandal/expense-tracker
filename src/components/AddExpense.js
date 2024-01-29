@@ -86,7 +86,7 @@ const AddExpense = () => {
         if (!error && status === 'completed') {
             console.log(data);
             notificationCtx.addNotification({ type: 'success', message: 'Expense added successfully' });
-            navigate(`/groups/${groupId}`);
+            isGroupExpense ? navigate(`/groups/${groupId}`) : navigate('/transactions');
         }
         if (error) {
             notificationCtx.addNotification({ type: 'fail', message: error });

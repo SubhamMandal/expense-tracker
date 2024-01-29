@@ -4,6 +4,8 @@ import { getAllExpense } from '../lib/api';
 import classes from './Transactions.module.css';
 import NotificationContext from '../store/NotificationContext';
 import { Link } from 'react-router-dom';
+import Loader from '../utils/Loader';
+import { Dropdown, DropdownItem } from '../utils/Dropdown';
 
 const monthText = { '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr' }
 
@@ -14,40 +16,65 @@ const processDate = (fullDate) => {
     return <div>{month} <div style={{ fontSize: '1.75rem' }}>{date}</div></div>
 }
 
-const filterExpense = () => {
-
+const filterExpense = (expenses, sortBy) => {
+    let filteredExpenses = expenses || [];
+    if (sortBy === 'date') {
+        filteredExpenses = filteredExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } if (sortBy === 'description') {
+        filteredExpenses = filteredExpenses.sort((a, b) => b[sortBy] < a[sortBy] ? 1 : -1);
+    }else {
+        filteredExpenses = filteredExpenses.sort((a, b) => b[sortBy] - a[sortBy]);
+    }
+    return filteredExpenses;
 }
 
 const Transactions = () => {
     const notificationCtx = useContext(NotificationContext);
     const { sendRequest, error, data, status } = useHttp(getAllExpense);
     const [filteredExpenses, setFilteredExpenses] = useState([]);
+    const [sortBy, setSortBy] = useState('date');
     useEffect(() => {
         sendRequest();
     }, [])
 
     useEffect(() => {
-        if (error) {
-            notificationCtx.addNotification({ type: 'fail', message: error })
-        } else if (data) {
-            setFilteredExpenses(data.allExpense)
-        }
-    }, [error, data])
+        const filtered = filterExpense(data?.allExpense, sortBy);
+        setFilteredExpenses(filtered);
+    }, [data]);
 
-    console.log(filteredExpenses)
+    const sortHandler = (e) => {
+        setFilteredExpenses(prev => filterExpense(prev, e.target.value));
+        setSortBy(e.target.value);
+    }
+
+    if (status === 'pending') {
+        return <Loader />
+    }
+
     if (error) {
         return <div>{error}</div>;
     }
     return (
         <section>
-            <div className={classes.controls}></div>
-            <label>filter</label>
-            <select className={classes.dropdown}>
-                <option>option1</option>
-                <option>option2</option>
-                <option>option3</option>
-            </select>
-            {!filteredExpenses.length ?
+            <div className={classes.controls}>
+                <div className={classes.control}>
+                    <label htmlFor='sortBy'>Sort by:</label>
+                    <Dropdown value={sortBy} onChange={sortHandler} id='sortBy'>
+                        <DropdownItem label="Date" value="date" />
+                        <DropdownItem label="Amount" value="amount" />
+                        <DropdownItem label="Description" value="description" />
+                    </Dropdown>
+                </div>
+                <div className={classes.control}>
+                    <label htmlFor='filter'>Filter:</label>
+                    <Dropdown value={''} onChange={() => {}} id='filter'>
+                        <DropdownItem label="All" value="all" />
+                        <DropdownItem label="Group 1" value="group1" />
+                        <DropdownItem label="Group 2" value="group2" />
+                    </Dropdown>
+                </div>
+            </div>
+            {!filteredExpenses?.length ?
                 <div className={classes.noExpense}>
                     No Expense to show
                     <Link to='/add-expense' className={classes.addExpense} >

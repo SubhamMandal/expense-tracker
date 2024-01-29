@@ -5,6 +5,7 @@ import useHttp from '../hooks/use-http';
 import { loginUser, signUpUser } from '../lib/api';
 import AuthContext from '../store/AuthContext';
 import NotificationContext from '../store/NotificationContext';
+import Loader from '../utils/Loader';
 
 const Login = () => {
     const [isLogin, setIsLogin] = useState(true);
@@ -61,9 +62,9 @@ const Login = () => {
             notificationCtx.addNotification({type: 'fail', message: error});
         }
     }, [error, status]);
-
     return (
         <section className={classes.loginPage}>
+            {status === 'pending' && <Loader />}
             <article className={classes.loginModal} >
                 <div className={classes.tabs}>
                     <div className={`${classes.header} ${isLogin && classes.selected}`} onClick={() => setIsLogin(true)}>Login</div>

@@ -22,7 +22,8 @@
 .tbody {
   margin-top: 0.25rem;
   padding: 0 0.5rem;
-  height: 55vh;
+  /* height: 55vh; */
+  height: calc(100vh - 12rem);
   overflow-y: scroll;
   /* background-color: aqua; */
 }
@@ -51,15 +52,16 @@
 }
 
 .description {
-  width: 50%;
+  width: 60%;
   text-align: start;
   font-size: 1.5rem;
   margin-left: 0.5rem;
+  white-space: nowrap;
   /* background-color: blue; */
 }
 
 .amount {
-  width: 20%;
+  width: 25%;
   font-size: 1.5rem;
   display: flex;
   align-items: center;
@@ -98,11 +100,28 @@
 }
 
 .controls {
+  position: sticky;
   display: flex;
-  padding: 1rem;
+  padding: 1rem 0;
+  gap: .5rem;
+  color: black;
   justify-content: space-evenly;
+  background-color: var(--color1);
 }
 
+.control {
+  display: flex;
+  /* flex-direction: column; */
+  align-items: center;
+  gap: .5rem;
+}
+
+/* select { */
+  /* background-color: aqua; */
+  /* max-width: 7.3rem; */
+/* } */
+
+/* 
 .dropdown {
   background-color: white;
   border: thin solid blue;
@@ -118,4 +137,4 @@
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
-}
+} */

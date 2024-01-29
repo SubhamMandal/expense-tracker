@@ -5,6 +5,7 @@ import { getUserGroups } from '../lib/api';
 import { iconColor, iconPicture } from '../static/constants';
 import AddGroup from './AddGroup';
 import { Link } from 'react-router-dom';
+import Loader from '../utils/Loader';
 
 const Groups = () => {
     const [addGroup, setAddGroup] = useState(false);
@@ -22,7 +23,7 @@ const Groups = () => {
     }, [data])
 
     if (status === 'pending') {
-        return <div>Getting your groups</div>
+        return <Loader />
     }
 
     if (error) {
