@@ -179,7 +179,6 @@ export async function joinGroup(groupId) {
     return data;
 }
 
-
 export async function getGroupExpenses(groupId) {
     let response;
     try {
@@ -197,6 +196,28 @@ export async function getGroupExpenses(groupId) {
     const data = await response.json();
     if (!response.ok) {
         throw new Error(data.message || 'Could not get group expenses');
+    }
+
+    return data;
+}
+
+export async function getExpenseDetails(expenseId) {
+    let response;
+    try {
+        response = await fetch(`${BASE_URL}/expense/${expenseId}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': document.cookie.split('=')[1],
+            },
+        });
+    } catch (err) {
+        throw new Error(err || 'Network Error');
+    }
+
+    const data = await response.json();
+    if (!response.ok) {
+        throw new Error(data.message || 'Could not fetch expense details');
     }
 
     return data;

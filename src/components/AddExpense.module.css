@@ -159,3 +159,14 @@ input:focus {
 .splitExpense button.done {
   background-color: rgb(98, 243, 98);
 }
+
+.membersList {
+  max-height: 50vh;
+  overflow: scroll;
+}
+
+.title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: black;
+}

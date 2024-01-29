@@ -11,6 +11,7 @@ import Transactions from "./src/components/Transactions";
 import Groups from "./src/components/Groups";
 import GroupDetails from "./src/components/GroupDetails";
 import JoinGroup from "./src/components/JoinGroup";
+import ExpenseDetails from "./src/components/ExpenseDetails";
 
 const App = () => {
     const authCtx = useContext(AuthContext);
@@ -60,6 +61,6 @@ export const router = createBrowserRouter([
     },
     {
         path: 'transactions/:expenseId',
-        element: <Layout hasBack={true}><div>expense details</div></Layout>
+        element: <Layout hasBack={true}><ExpenseDetails /></Layout>
     }
 ]) 

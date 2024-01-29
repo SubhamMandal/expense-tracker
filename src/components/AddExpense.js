@@ -5,11 +5,11 @@ import useHttp from '../hooks/use-http';
 import { addExpense } from '../lib/api';
 import AuthContext from '../store/AuthContext';
 import NotificationContext from '../store/NotificationContext';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Dropdown, DropdownItem } from '../utils/Dropdown';
 import Popup from '../utils/Popup';
 
-const todayDate = new Date().toISOString().slice(0, 10);
+const todayDate = new Date().toLocaleDateString('fr-ca');
 const tags = ['Uncatagorised', 'Outing', 'Food', 'Grosyries', 'Rent', 'Investments'];
 const processMembers = (members, loggedInUser) => {
     members.sort(function (x, y) { return x.username == loggedInUser ? -1 : y == loggedInUser ? 1 : 0; });
@@ -32,6 +32,7 @@ const AddExpense = () => {
     const { sendRequest, data, error, status } = useHttp(addExpense);
     const notificationCtx = useContext(NotificationContext);
     const isGroupExpense = groupId ? true : false;
+    const navigate = useNavigate();
 
     const onDescriptionChange = (e) => {
         setDescription(e.target.value);
@@ -71,6 +72,11 @@ const AddExpense = () => {
             expenseData.split = split;
             const splitAmount = split === 'equally' ? members.map((member) => { return { userId: member._id, amount: +amount / members.length } }) : expenseSplitAmonut;
             expenseData.splitAmount = splitAmount;
+            const total = splitAmount.reduce((total, curr) => total += +curr.amount, 0);
+            if (split !== 'equally' && +amount !== +total) {
+                notificationCtx.addNotification({ type: 'fail', message: `The total of everyone's share is different than the total` });
+                return;
+            }
         }
         console.log('Expense added -> ', expenseData)
         sendRequest(expenseData, true);
@@ -80,9 +86,7 @@ const AddExpense = () => {
         if (!error && status === 'completed') {
             console.log(data);
             notificationCtx.addNotification({ type: 'success', message: 'Expense added successfully' });
-            setAmount('');
-            setDescription('');
-            setType(tags[0]);
+            navigate(`/groups/${groupId}`);
         }
         if (error) {
             notificationCtx.addNotification({ type: 'fail', message: error });
@@ -112,7 +116,7 @@ const AddExpense = () => {
                 </div>
                 <div className={classes.control}>
                     <span className="material-symbols-outlined">calendar_month</span>
-                    <Input id="date" label="Date" type="date" value={date} onChange={onDateChange} />
+                    <Input id="date" label="Date" type="date" value={date} onChange={onDateChange} max={todayDate} />
                 </div>
                 {isGroupExpense &&
                     <div className={classes.group}>
@@ -160,21 +164,28 @@ const ExpenseSplitPopup = ({ members, amount, closePopup }) => {
         setTotal(sum);
     }
 
+    const doneHandler = () => {
+        +total === +amount && closePopup(total, inputs);
+    }
+
     return (
         <Popup >
             <div className={classes.splitExpense}>
-                {members.map((member, index) => <div className={classes.userSplit} key={member._id}>
-                    <div>{member?.username}</div>
-                    <div>
-                        <span className="material-symbols-outlined">currency_rupee</span>
-                        <input type='number' placeholder='0' onChange={(e) => handleChange(index, e)} />
-                    </div>
-                </div>)}
-                <div>{+total} of {amount || 0}</div>
+                <div className={classes.title}>Split by exact amount</div>
+                <div className={classes.membersList}>
+                    {members.map((member, index) => <div className={classes.userSplit} key={member._id}>
+                        <div>{member?.username}</div>
+                        <div>
+                            <span className="material-symbols-outlined">currency_rupee</span>
+                            <input type='number' placeholder='0' onChange={(e) => handleChange(index, e)} />
+                        </div>
+                    </div>)}
+                </div>
+                <div className={total > amount ? "red" : ""}>{+total} of {amount || 0}</div>
                 {amount >= total ? <div>Remaing Amount: {+amount - +total}</div> :
-                    <div>You are over by {total - amount}</div>}
+                    <div className="red">You are over by {total - amount}</div>}
                 <div className={classes.buttons}>
-                    <button className={classes.done} onClick={() => closePopup(total, inputs)}>Done</button>
+                    <button disabled={+total !== +amount} className={classes.done} onClick={doneHandler}>Done</button>
                     <button onClick={() => closePopup(total, inputs)}>Cancel</button>
                 </div>
             </div>
