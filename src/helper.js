@@ -3,4 +3,4 @@ const { format } = new Intl.NumberFormat('hi-In', {
     currency: 'INR'
 })
 
-export { format as CurrencyFormat };
+export { format as currencyFormat };

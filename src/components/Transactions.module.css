@@ -48,7 +48,11 @@
 
 .date {
   width: 10%;
-  /* background-color: brown; */
+  /* background-color: gray;
+  border-radius: .5rem;
+  margin: .5rem 0;
+  color: white;
+  padding: .2rem; */
 }
 
 .description {
