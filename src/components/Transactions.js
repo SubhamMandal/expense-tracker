@@ -99,6 +99,26 @@ const Transactions = () => {
 export default Transactions;
 
 const Item = ({ expense, deleteExpense }) => {
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
+    const minSwipeDistance = 50
+
+    const onTouchStart = (e) => {
+        setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
+        setTouchStart(e.targetTouches[0].clientX)
+    }
+
+    const onTouchMove = (e) => setTouchEnd(e.targetTouches[0].clientX)
+
+    const onTouchEnd = () => {
+        if (!touchStart || !touchEnd) return
+        const distance = touchStart - touchEnd
+        const isLeftSwipe = distance > minSwipeDistance
+        const isRightSwipe = distance < -minSwipeDistance
+        if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
+        isLeftSwipe ? itemRef.current.style.transform = "translate(-5rem)" : itemRef.current.style.transform = "translate(0rem)";
+    }
+
     let downX;
     const itemRef = useRef();
     const onPointerMove = (e) => {
@@ -120,7 +140,8 @@ const Item = ({ expense, deleteExpense }) => {
 
     return (
         <div className={classes.container}>
-            <div className={classes.wrapper} ref={itemRef} onPointerDown={onPointerDown}>
+            <div className={classes.wrapper} ref={itemRef} onPointerDown={onPointerDown}
+                onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                 <Link to={expense._id} className={classes.row} >
                     <div className={`${classes.cell} ${classes.date}`} >{processDate(expense.date)}</div>
                     <div className={`${classes.cell} ${classes.description}`} >{expense.description}</div>
