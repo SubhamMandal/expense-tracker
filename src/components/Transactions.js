@@ -99,6 +99,7 @@ const Transactions = () => {
 export default Transactions;
 
 const Item = ({ expense, deleteExpense }) => {
+    const itemRef = useRef();
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
     const minSwipeDistance = 50
@@ -116,31 +117,37 @@ const Item = ({ expense, deleteExpense }) => {
         const isLeftSwipe = distance > minSwipeDistance
         const isRightSwipe = distance < -minSwipeDistance
         if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
-        isLeftSwipe ? itemRef.current.style.transform = "translate(-5rem)" : itemRef.current.style.transform = "translate(0rem)";
-    }
-
-    let downX;
-    const itemRef = useRef();
-    const onPointerMove = (e) => {
-        const newX = e.clientX;
-        // if (newX - downX < 10) {
-        if (downX > newX) {
-            itemRef.current.style.transform = "translate(-5rem)";
-            setTimeout(() => { if (itemRef.current) itemRef.current.style.transform = "translate(0rem)" }, 2000);
-        } else {
+        if (isLeftSwipe) {
+            itemRef.current.style.transform = "translate(-5rem)"
+            setTimeout(() => { if (itemRef.current) itemRef.current.style.transform = "translate(0rem)" }, 3000);
+        }
+        else if (isRightSwipe) {
             itemRef.current.style.transform = "translate(0rem)";
         }
-        itemRef.current.removeEventListener("pointermove", onPointerMove);
     }
-    const onPointerDown = (e) => {
-        e.stopPropagation();
-        downX = e.clientX;
-        itemRef.current.addEventListener("pointermove", onPointerMove);
-    }
+    // For desktop
+    // let downX;
+    // const onPointerMove = (e) => {
+    //     const newX = e.clientX;
+    //     // if (newX - downX < 10) {
+    //     if (downX > newX) {
+    //         itemRef.current.style.transform = "translate(-5rem)";
+    //         setTimeout(() => { if (itemRef.current) itemRef.current.style.transform = "translate(0rem)" }, 2000);
+    //     } else {
+    //         itemRef.current.style.transform = "translate(0rem)";
+    //     }
+    //     itemRef.current.removeEventListener("pointermove", onPointerMove);
+    // }
+    // const onPointerDown = (e) => {
+    //     console.log('pointerDown')
+    //     e.stopPropagation();
+    //     downX = e.clientX;
+    //     itemRef.current.addEventListener("pointermove", onPointerMove);
+    // }
 
     return (
         <div className={classes.container}>
-            <div className={classes.wrapper} ref={itemRef} onPointerDown={onPointerDown}
+            <div className={classes.wrapper} ref={itemRef} // onPointerDown={onPointerDown}
                 onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEnd}>
                 <Link to={expense._id} className={classes.row} >
                     <div className={`${classes.cell} ${classes.date}`} >{processDate(expense.date)}</div>
