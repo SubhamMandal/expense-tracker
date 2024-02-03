@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import useHttp from '../hooks/use-http';
 import { getAllExpense } from '../lib/api';
 import classes from './Transactions.module.css';
@@ -22,7 +22,7 @@ const filterExpense = (expenses, sortBy) => {
         filteredExpenses = filteredExpenses.sort((a, b) => new Date(b.date) - new Date(a.date));
     } if (sortBy === 'description') {
         filteredExpenses = filteredExpenses.sort((a, b) => b[sortBy] < a[sortBy] ? 1 : -1);
-    }else {
+    } else {
         filteredExpenses = filteredExpenses.sort((a, b) => b[sortBy] - a[sortBy]);
     }
     return filteredExpenses;
@@ -47,6 +47,10 @@ const Transactions = () => {
         setSortBy(e.target.value);
     }
 
+    const deleteHanlder = (id) => {
+        setFilteredExpenses(prev => prev.filter(expense => expense._id !== id));
+    }
+
     if (status === 'pending') {
         return <Loader />
     }
@@ -67,7 +71,7 @@ const Transactions = () => {
                 </div>
                 <div className={classes.control}>
                     <label htmlFor='filter'>Filter:</label>
-                    <Dropdown value={''} onChange={() => {}} id='filter'>
+                    <Dropdown value={''} onChange={() => { }} id='filter'>
                         <DropdownItem label="All" value="all" />
                         <DropdownItem label="Group 1" value="group1" />
                         <DropdownItem label="Group 2" value="group2" />
@@ -84,12 +88,7 @@ const Transactions = () => {
                 </div> :
                 <div className={classes.table}>
                     <div className={classes.tbody}>
-                        {filteredExpenses.map(expense => <Link to={expense._id} key={expense._id} className={classes.row}>
-                            <div className={`${classes.cell} ${classes.date}`} >{processDate(expense.date)}</div>
-                            <div className={`${classes.cell} ${classes.description}`} >{expense.description}</div>
-                            <div className={`${classes.cell} ${classes.amount}`} ><span className="material-symbols-outlined">currency_rupee</span>{expense.amount}</div>
-                            {/* <div className={classes.cell} >{expense.catagory}</div> */}
-                        </Link>)}
+                        {filteredExpenses.map(expense => <Item key={expense._id} expense={expense} deleteExpense={deleteHanlder} />)}
                     </div>
                 </div>
             }
@@ -98,3 +97,37 @@ const Transactions = () => {
 }
 
 export default Transactions;
+
+const Item = ({ expense, deleteExpense }) => {
+    const itemRef = useRef();
+    const onPointerMove = (e) => {
+        const newX = e.clientX;
+        // if (newX - downX < 10) {
+        if (downX > newX) {
+            itemRef.current.style.transform = "translate(-5rem)";
+            setTimeout(() => { if (itemRef.current) itemRef.current.style.transform = "translate(0rem)" }, 2000);
+        } else {
+            itemRef.current.style.transform = "translate(0rem)";
+        }
+        itemRef.current.removeEventListener("pointermove", onPointerMove);
+    }
+    const onPointerDown = (e) => {
+        e.stopPropagation();
+        downX = e.clientX;
+        itemRef.current.addEventListener("pointermove", onPointerMove);
+    }
+
+    return (
+        <div className={classes.container}>
+            <div className={classes.wrapper} ref={itemRef} onPointerDown={onPointerDown}>
+                <Link to={expense._id} className={classes.row} >
+                    <div className={`${classes.cell} ${classes.date}`} >{processDate(expense.date)}</div>
+                    <div className={`${classes.cell} ${classes.description}`} >{expense.description}</div>
+                    <div className={`${classes.cell} ${classes.amount}`} ><span className="material-symbols-outlined">currency_rupee</span>{expense.amount}</div>
+                    {/* <div className={classes.cell} >{expense.catagory}</div> */}
+                </Link>
+                <div className={classes.delete} onClick={() => deleteExpense(expense._id)} ><span className="material-symbols-outlined">delete</span></div>
+            </div>
+        </div>
+    );
+}

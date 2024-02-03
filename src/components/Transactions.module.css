@@ -36,6 +36,7 @@
   border-bottom: 1px solid rgb(222, 214, 214);
   justify-content: space-between;
   color: gray;
+  flex: 1 0 100%;
 }
 
 .cell {
@@ -75,6 +76,24 @@
 
 .amount span {
   color: gray;
+}
+
+.wrapper {
+  display: flex;
+  /* overflow:hidden; */
+  transition: transform .5s;
+  width: 100%;
+  align-items: center;
+}
+
+.container {
+  overflow: hidden;
+}
+
+.delete {
+  margin-left: 2rem;
+  color: red;
+  /* background-color: aqua; */
 }
 
 .noExpense {
