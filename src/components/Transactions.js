@@ -99,6 +99,7 @@ const Transactions = () => {
 export default Transactions;
 
 const Item = ({ expense, deleteExpense }) => {
+    let downX;
     const itemRef = useRef();
     const onPointerMove = (e) => {
         const newX = e.clientX;
