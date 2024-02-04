@@ -95,14 +95,14 @@ const Transactions = () => {
         </section>
     )
 }
-
+let swipeBack;
 export default Transactions;
 
 const Item = ({ expense, deleteExpense }) => {
     const itemRef = useRef();
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
-    const minSwipeDistance = 50
+    const minSwipeDistance = 50;
 
     const onTouchStart = (e) => {
         setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
@@ -119,10 +119,11 @@ const Item = ({ expense, deleteExpense }) => {
         if (isLeftSwipe || isRightSwipe) console.log('swipe', isLeftSwipe ? 'left' : 'right')
         if (isLeftSwipe) {
             itemRef.current.style.transform = "translate(-5rem)"
-            setTimeout(() => { if (itemRef.current) itemRef.current.style.transform = "translate(0rem)" }, 3000);
+            swipeBack = setTimeout(() => { if (itemRef.current) itemRef.current.style.transform = "translate(0rem)" }, 3000);
         }
         else if (isRightSwipe) {
             itemRef.current.style.transform = "translate(0rem)";
+            clearTimeout(swipeBack);
         }
     }
     // For desktop
