@@ -6,6 +6,8 @@ import NotificationContext from '../store/NotificationContext';
 import { Link } from 'react-router-dom';
 import Loader from '../utils/Loader';
 import { Dropdown, DropdownItem } from '../utils/Dropdown';
+import AuthContext from '../store/AuthContext';
+import { currencyFormat } from '../helper';
 
 const monthText = { '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr' }
 
@@ -26,6 +28,16 @@ const filterExpense = (expenses, sortBy) => {
         filteredExpenses = filteredExpenses.sort((a, b) => b[sortBy] - a[sortBy]);
     }
     return filteredExpenses;
+}
+
+const getMyShare = (arr, user) => {
+    let val = 0;
+    arr && arr.forEach(curr => {
+        if (curr.userId === user) {
+            val = curr.amount;
+        }
+    })
+    return val;
 }
 
 const Transactions = () => {
@@ -103,6 +115,7 @@ const Item = ({ expense, deleteExpense }) => {
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
     const minSwipeDistance = 50;
+    const authCtx = useContext(AuthContext);
 
     const onTouchStart = (e) => {
         setTouchEnd(null) // otherwise the swipe is fired even with usual touch events
@@ -153,8 +166,26 @@ const Item = ({ expense, deleteExpense }) => {
                 <Link to={expense._id} className={classes.row} >
                     <div className={`${classes.cell} ${classes.date}`} >{processDate(expense.date)}</div>
                     <div className={`${classes.cell} ${classes.description}`} >{expense.description}</div>
-                    <div className={`${classes.cell} ${classes.amount}`} ><span className="material-symbols-outlined">currency_rupee</span>{expense.amount}</div>
-                    {/* <div className={classes.cell} >{expense.catagory}</div> */}
+                    {!expense.associatedGroup ? <div className={`${classes.cell} ${classes.amount} black`} >
+                        <div>Self expense</div>
+                        <div>
+                            {currencyFormat(expense.amount)}
+                        </div>
+                    </div>
+                        : expense.paidBy === authCtx.user?._id ?
+                            <div className={`${classes.cell} ${classes.amount} green`} >
+                                <div>You lent</div>
+                                <div>
+                                    {currencyFormat(expense.amount - +getMyShare(expense.splitAmount, authCtx.user?._id))}
+                                </div>
+                            </div>
+                            : <div className={`${classes.cell} ${classes.amount} red`} >
+                                <div>You borrowed</div>
+                                <div>
+                                    {currencyFormat(getMyShare(expense.splitAmount, authCtx.user?._id))}
+                                </div>
+                            </div>
+                    }
                 </Link>
                 <div className={classes.delete} onClick={() => deleteExpense(expense._id)} ><span className="material-symbols-outlined">delete</span></div>
             </div>

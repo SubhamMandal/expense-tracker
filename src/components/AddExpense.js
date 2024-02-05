@@ -98,7 +98,9 @@ const AddExpense = () => {
         if (total != amount) {
             setSplit('equally');
         } else {
-            setExpenseSplitAmonut(members.map((member, index) => { return { userId: member._id, amount: values[index] } }));
+            const splitExpenses = members.map((member, index) => { return { userId: member._id, amount: values[index] } });
+            const filteredSplitExpense = splitExpenses.filter(expense => expense.amount > 0);
+            setExpenseSplitAmonut(filteredSplitExpense);
         }
     }
     return (

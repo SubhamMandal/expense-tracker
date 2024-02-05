@@ -56,7 +56,7 @@ const ExpenseDetails = () => {
             {status === 'pending' && <Loader />}
             <div className={classes.head}>
                 <div className={classes.description}>{expense?.description}<span>{expense.catagory}</span></div>
-                <span className={`material-symbols-outlined ${classes.logo}`}>{iconPicture[data?.category] || 'person'}</span>
+                <span className={`material-symbols-outlined ${classes.logo}`}>{iconPicture[data?.catagory] || 'person'}</span>
                 <span className={`material-symbols-outlined ${classes.icon} red`}>delete</span>
                 <span className={`material-symbols-outlined ${classes.icon}`}>edit</span>
             </div>

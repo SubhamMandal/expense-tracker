@@ -69,13 +69,19 @@
   width: 25%;
   font-size: 1.5rem;
   display: flex;
-  align-items: center;
+  /* align-items: center; */
   /* background-color: aqua; */
   /* color: rgb(116, 88, 255); */
+  flex-direction: column;
+  align-items: self-start;
 }
 
 .amount span {
   color: gray;
+}
+
+.amount div:first-child {
+  font-size: .75rem;
 }
 
 .wrapper {
