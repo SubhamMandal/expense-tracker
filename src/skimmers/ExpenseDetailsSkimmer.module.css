@@ -1,0 +1,136 @@
+.shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 104px;
+  display: inline-block;
+  position: relative;
+
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+}
+
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.expenseDetails {
+  height: 90vh;
+}
+
+.head {
+  background-color: rgba(127, 238, 119, 0.721);
+  margin: 5px;
+  padding: 0 0.5rem;
+  color: black;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  height: 6rem;
+}
+
+.logo {
+  position: relative;
+  top: 3rem;
+  background-color: wheat;
+  border-radius: 50%;
+  padding: 1rem;
+  border: 5px solid white;
+  height: 3.5rem;
+  width: 3.5rem;
+}
+
+.icon {
+  position: relative;
+  bottom: 2rem;
+  margin-right: 0.5rem;
+}
+
+.header {
+  color: black;
+  padding: 0 1rem;
+}
+
+.description {
+  font-size: 2rem;
+  width: 60vw;
+}
+
+.desc {
+  height: 2.5rem;
+  width: 10rem;
+  border-radius: 1rem;
+}
+
+.description span {
+  display: block;
+  border-radius: 10px;
+  margin-top: 0.2rem;
+  height: 1.5rem;
+  width: 4rem;
+}
+
+.amount {
+  height: 3rem;
+  margin: 0.5rem 0;
+  width: 8rem;
+  border-radius: 0.5rem;
+}
+
+.amount + div {
+    display: block;
+    width: 15rem;
+    border-radius: 0.5rem;
+    height: 1.5rem;
+}
+
+.list {
+  margin-top: 2rem;
+  font-size: 1.5rem;
+  border: 2px solid gray;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 1rem;
+}
+
+.list div:first-child {
+  margin-bottom: 1rem;
+  width: 12rem;
+  height: 2rem;
+  border-radius: 0.5rem;
+}
+
+.list div:not(:first-child) {
+  margin-left: 1rem;
+  font-size: 1rem;
+  display: block;
+  height: 1.3rem;
+  width: 7rem;
+  margin-bottom: 0.5rem;
+}
+
+.summary {
+  font-size: 1.2rem;
+  margin: auto;
+  margin-top: 1rem;
+  display: block;
+  width: 13rem;
+  border-radius: 0.5rem;
+  height: 1.5rem;
+}

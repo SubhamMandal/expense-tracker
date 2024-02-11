@@ -8,6 +8,7 @@ import { currencyFormat } from '../helper';
 import { iconPicture } from '../static/constants';
 
 import classes from './ExpenseDetails.module.css';
+import ExpenseDetailsSkimmer from '../skimmers/ExpenseDetailsSkimmer';
 
 const monthText = ['Jan', 'Feb', 'Mar', 'Apr'];
 
@@ -49,11 +50,13 @@ const ExpenseDetails = () => {
     if (error) {
         return <div>Opps! Something went wrong! {error}</div>
     }
+    
+    if (status === 'pending' || !expense.amount) return <ExpenseDetailsSkimmer />
     console.log({ data }, authCtx.user)
 
     return (
         <div className={classes.expenseDetails}>
-            {status === 'pending' && <Loader />}
+            {/* {status === 'pending' && <Loader />} */}
             <div className={classes.head}>
                 <div className={classes.description}>{expense?.description}<span>{expense.catagory}</span></div>
                 <span className={`material-symbols-outlined ${classes.logo}`}>{iconPicture[data?.catagory] || 'person'}</span>

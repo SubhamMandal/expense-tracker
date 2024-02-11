@@ -39,6 +39,7 @@ export const AuthContextProvider = (props) => {
         document.cookie = `token=; expires=Sun, 13 Aug 2023 10:26:09 GMT;`;
         localStorage.removeItem('userData');
         localStorage.removeItem('sessionTimeout');
+        document.cookie = `token=; expires=Sun, 13 Aug 2023 10:26:09 GMT;`;
         clearTimeout(logoutTimeout);
     }, []);
 
@@ -46,10 +47,11 @@ export const AuthContextProvider = (props) => {
         setIsLoggedIn(true);
         const expirationTime = loginData?.expirationTimeStamp;
         const remainingTime = calculateRemainingDuration(expirationTime);
-        document.cookie = `token=; expires=Sun, 13 Aug 2023 10:26:09 GMT;`;
-        if (document.cookie.split('=')[0] === 'token') {
-            console.log('cookie deletion failed...')
-        }
+        // document.cookie = `token=; expires=Sun, 13 Aug 2023 10:26:09 GMT;`;
+        // if (document.cookie.split('=')[0] === 'token') {
+        //     console.log('cookie deletion failed...')
+        // }
+        console.log('adding token')
         document.cookie = `token=${loginData.token}; expires=${new Date(expirationTime)};`;
         const userData = { ...loginData.userDetails };
         setUser(userData);
