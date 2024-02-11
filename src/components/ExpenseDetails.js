@@ -73,7 +73,11 @@ const ExpenseDetails = () => {
                     </div>
                     {expense.paidBy === authCtx.user?._id ?
                         <div className={classes.summary}>You are owed <span className="green">{currencyFormat(expense.amount - +getMyShare(expense.splitAmount, authCtx.user?._id))}</span></div>
-                        : <div className={classes.summary}>You <span>owe</span> {members[expense.paidBy]} <span className="red">{currencyFormat(getMyShare(expense.splitAmount, authCtx.user?._id))}</span></div>
+                        : <div className={classes.summary}>
+                            {getMyShare(expense.splitAmount, authCtx.user?._id) ?
+                                <>You <span>owe</span> {members[expense.paidBy]} <span className="red">{currencyFormat(getMyShare(expense.splitAmount, authCtx.user?._id))}</span></>
+                                : <>You are not involved</>}
+                        </div>
                     }
                 </div>}
         </div>
