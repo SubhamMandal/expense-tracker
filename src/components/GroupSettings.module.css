@@ -43,7 +43,7 @@
 }
 
 .memeberList {
-  height: calc(100vh - 29.5rem);
+  height: calc(100dvh - 29.5rem);
   overflow-y: scroll;
 }
 
