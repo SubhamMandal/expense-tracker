@@ -46,6 +46,10 @@ export const AuthContextProvider = (props) => {
         setIsLoggedIn(true);
         const expirationTime = loginData?.expirationTimeStamp;
         const remainingTime = calculateRemainingDuration(expirationTime);
+        document.cookie = `token=; expires=Sun, 13 Aug 2023 10:26:09 GMT;`;
+        if (document.cookie.split('=')[0] === 'token') {
+            console.log('cookie deletion failed...')
+        }
         document.cookie = `token=${loginData.token}; expires=${new Date(expirationTime)};`;
         const userData = { ...loginData.userDetails };
         setUser(userData);

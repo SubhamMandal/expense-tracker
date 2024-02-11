@@ -1,0 +1,118 @@
+.header {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  gap: 1rem;
+  color: black;
+  /* box-shadow: 0 0 4px gray; */
+  border-bottom: 2px solid gray;
+}
+
+.header > span {
+  box-shadow: 0px 0px 8px gray;
+}
+
+.logo {
+  font-size: 4rem !important;
+  padding: 0.2rem;
+  border-radius: 1rem;
+}
+
+.groupName {
+  font-size: 1.2rem;
+}
+
+.groupCategory {
+  font-size: 1rem;
+  color: gray;
+}
+
+.edit {
+  box-shadow: none !important;
+  margin-left: auto;
+}
+
+.members {
+  padding: 1rem;
+}
+
+.members > .title {
+  font-size: 1rem;
+  color: black;
+  margin-bottom: 1rem;
+}
+
+.memeberList {
+  height: calc(100vh - 29.5rem);
+  overflow-y: scroll;
+}
+
+.member {
+  /* background-color: aqua; */
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.member > span:first-child {
+  font-size: 3.5rem;
+  background-color: gray;
+  color: white;
+  border-radius: 50%;
+  padding: 0.5rem;
+}
+
+.member .userDetails {
+  color: black;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.member .userDetails .email {
+  font-size: 1.2rem;
+  color: gray;
+}
+
+.invite {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: 1.2rem;
+}
+
+.invite > span {
+  font-size: 3.5rem;
+  padding: 0.5rem;
+}
+
+.leave {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: rgb(246, 155, 9);
+  margin: .5rem;
+  padding: .5rem;
+  font-size: 1.2rem;
+  color: black;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+  /* border: 2px solid red; */
+}
+
+.delete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  background-color: rgb(212, 62, 62);
+  margin: .5rem;
+  padding: .5rem;
+  font-size: 1.2rem;
+  color: black;
+  font-weight: 800;
+  font-family: 'Courier New', Courier, monospace;
+  /* border: 2px solid red; */
+}

@@ -12,6 +12,7 @@ import Groups from "./src/components/Groups";
 import GroupDetails from "./src/components/GroupDetails";
 import JoinGroup from "./src/components/JoinGroup";
 import ExpenseDetails from "./src/components/ExpenseDetails";
+import GroupSettings from "./src/components/GroupSettings";
 
 const App = () => {
     const authCtx = useContext(AuthContext);
@@ -54,6 +55,10 @@ export const router = createBrowserRouter([
     {
         path: 'groups/:groupId',
         element: <Layout hasBack={true}><GroupDetails /></Layout>,
+    },
+    {
+        path: 'group-settings/:groupId',
+        element: <Layout hasBack={true}><GroupSettings /></Layout>,
     },
     {
         path: 'transactions',

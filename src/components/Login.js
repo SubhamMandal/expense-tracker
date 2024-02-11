@@ -59,30 +59,30 @@ const Login = () => {
                 notificationCtx.addNotification({ type: 'success', message: 'User signed-up successfully!' })
             }
         } else if (error) {
-            notificationCtx.addNotification({type: 'fail', message: error});
+            notificationCtx.addNotification({ type: 'fail', message: error });
         }
     }, [error, status]);
     return (
         <section className={classes.loginPage}>
             {status === 'pending' && <Loader />}
-            <article className={classes.loginModal} >
+            <article className={`${classes.loginModal} ${isLogin && classes.loginBox}`} >
                 <div className={classes.tabs}>
                     <div className={`${classes.header} ${isLogin && classes.selected}`} onClick={() => setIsLogin(true)}>Login</div>
                     <div className={`${classes.header} ${!isLogin && classes.selected}`} onClick={() => setIsLogin(false)}>Sign up</div>
                 </div>
                 <form onSubmit={submitHandler} className={classes.form}>
-                    {!isLogin && <Input label="Email"
-                        id="email"
-                        type="email"
-                        value={email}
-                        onChange={emailInputHandler}
-                    />}
                     <Input label="UserName"
                         id="user"
                         type="text"
                         value={username}
                         onChange={usernameInputHandler}
                     />
+                    {!isLogin && <Input label="Email"
+                        id="email"
+                        type="email"
+                        value={email}
+                        onChange={emailInputHandler}
+                    />}
                     <Input label="Password"
                         id="password"
                         type="password"
