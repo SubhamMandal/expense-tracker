@@ -51,7 +51,7 @@ const ExpenseDetails = () => {
         return <div>Opps! Something went wrong! {error}</div>
     }
     
-    if (status === 'pending' || !expense.amount) return <ExpenseDetailsSkimmer />
+    if (status !== 'completed') return <ExpenseDetailsSkimmer />
     console.log({ data }, authCtx.user)
 
     return (

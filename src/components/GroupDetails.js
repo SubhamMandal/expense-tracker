@@ -8,6 +8,7 @@ import classes from './GroupDetails.module.css';
 import Popup from '../utils/Popup';
 import AuthContext from '../store/AuthContext';
 import { currencyFormat } from '../helper';
+import GroupDetailsSkimmer from '../skimmers/GroupDetailsSkimmer';
 
 const monthText = { '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr' }
 
@@ -72,6 +73,10 @@ const GroupDetails = () => {
             setExpenses(filterExpense(groupExpenseData.expenses, 'date') || []);
         }
     }, [data, groupExpenseData])
+
+    if (error) return <div>Opps! Something went wrong! <div>{error}</div></div>;
+
+    if (status !== 'completed' && groupExpenseStatus !== 'completed') return <GroupDetailsSkimmer />;
 
     return (
         <div>

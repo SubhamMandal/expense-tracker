@@ -8,6 +8,7 @@ import Loader from '../utils/Loader';
 import { Dropdown, DropdownItem } from '../utils/Dropdown';
 import AuthContext from '../store/AuthContext';
 import { currencyFormat } from '../helper';
+import TransactionsSkimmer from '../skimmers/TransactionsSkimmer';
 
 const monthText = { '01': 'Jan', '02': 'Feb', '03': 'Mar', '04': 'Apr' }
 
@@ -63,12 +64,12 @@ const Transactions = () => {
         setFilteredExpenses(prev => prev.filter(expense => expense._id !== id));
     }
 
-    if (status === 'pending') {
-        return <Loader />
-    }
-
     if (error) {
-        return <div>{error}</div>;
+        return <div>Opps! some error occured <div>{error}</div></div>;
+    }
+    
+    if (status !== 'completed') {
+        return <TransactionsSkimmer />
     }
     return (
         <section>

@@ -1,31 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=Salsa&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Salsa&display=swap");
 
 :root {
-    --color1: #FFCF81;
-    --color2: #FFB996;
-    --color3: #FDFFAB;
-    --color4: #D9EDBF;
+  --color1: #ffcf81;
+  --color2: #ffb996;
+  --color3: #fdffab;
+  --color4: #d9edbf;
 }
 
 * {
-    padding: 0;
-    margin: 0;
-    text-decoration: none;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
 }
 
 body {
-    font-family: 'Salsa', cursive;
-    color: gray;
+  font-family: "Salsa", cursive;
+  color: gray;
 }
 
 .red {
-    color: red;
+  color: red;
 }
 
 .green {
-    color: green;
+  color: green;
 }
 
 .black {
-    color: black;
+  color: black;
+}
+
+.shine {
+  background: #f6f7f8;
+  background-image: linear-gradient(
+    to right,
+    #f6f7f8 0%,
+    #edeef1 20%,
+    #f6f7f8 40%,
+    #f6f7f8 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 104px;
+  display: inline-block;
+  position: relative;
+
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeholderShimmer;
+  animation-timing-function: linear;
+}
+
+@keyframes placeholderShimmer {
+  0% {
+    background-position: -468px 0;
+  }
+
+  100% {
+    background-position: 468px 0;
+  }
 }

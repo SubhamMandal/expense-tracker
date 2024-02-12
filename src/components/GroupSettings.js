@@ -1,11 +1,13 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
 
-import classes from './GroupSettings.module.css';
 import useHttp from '../hooks/use-http';
 import { getGroup } from '../lib/api';
 import { useParams } from 'react-router-dom';
 import { iconColor, iconPicture } from '../static/constants';
 import { AddMemberPopup } from './GroupDetails';
+
+import classes from './GroupSettings.module.css';
+import GroupSettingsSkimmer from '../skimmers/GroupSettingsSkimmer';
 
 const GroupSettings = () => {
     const { groupId } = useParams();
@@ -21,7 +23,11 @@ const GroupSettings = () => {
             setGroupData(data.groupDetails);
         }
     }, [data]);
-    console.log(data);
+
+    if (error) return <div>Opps! Something went wrong <div>{error}</div></div>
+
+    if (status !== 'completed') return <GroupSettingsSkimmer />
+    
     return (
         <section>
             <div className={classes.header}>
