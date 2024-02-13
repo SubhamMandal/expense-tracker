@@ -5,7 +5,7 @@ import { getUserGroups } from '../lib/api';
 import { iconColor, iconPicture } from '../static/constants';
 import AddGroup from './AddGroup';
 import { Link } from 'react-router-dom';
-import Loader from '../utils/Loader';
+import GroupsSkimmer from '../skimmers/GroupsSkimmer';
 
 const Groups = () => {
     const [addGroup, setAddGroup] = useState(false);
@@ -22,12 +22,12 @@ const Groups = () => {
         }
     }, [data])
 
-    if (status === 'pending') {
-        return <Loader />
+    if (error) {
+        return <div>Oops! Could not fetch your groups {error}</div>
     }
 
-    if (error) {
-        return <div>Oops! Could not fetch your groups</div>
+    if (status !== 'completed') {
+        return <GroupsSkimmer />
     }
     return (
         <section>

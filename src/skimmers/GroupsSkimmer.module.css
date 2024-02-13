@@ -1,0 +1,8 @@
+  .groups > div {
+    height: 5rem;
+    width: 90%;
+    margin-bottom: 1rem;
+    padding: .5rem;
+    border-radius: .5rem;
+    box-shadow: 5px 5px 10px gray;
+  }

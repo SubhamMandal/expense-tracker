@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom';
 import useHttp from '../hooks/use-http';
 import { getExpenseDetails } from '../lib/api';
-import Loader from '../utils/Loader';
 import AuthContext from '../store/AuthContext';
 import { currencyFormat } from '../helper';
 import { iconPicture } from '../static/constants';
@@ -54,11 +53,13 @@ const ExpenseDetails = () => {
     if (status !== 'completed') return <ExpenseDetailsSkimmer />
     console.log({ data }, authCtx.user)
 
+    const descriptionFontSize = expense?.description?.length < 14 ? 2 : expense?.description?.length < 25 ? 1.5 : 1;  
+
     return (
         <div className={classes.expenseDetails}>
             {/* {status === 'pending' && <Loader />} */}
             <div className={classes.head}>
-                <div className={classes.description}>{expense?.description}<span>{expense.catagory}</span></div>
+                <div style={{fontSize: descriptionFontSize + 'rem'}} className={classes.description}>{expense?.description}<span>{expense.catagory}</span></div>
                 <span className={`material-symbols-outlined ${classes.logo}`}>{iconPicture[data?.catagory] || 'person'}</span>
                 <span className={`material-symbols-outlined ${classes.icon} red`}>delete</span>
                 <span className={`material-symbols-outlined ${classes.icon}`}>edit</span>
