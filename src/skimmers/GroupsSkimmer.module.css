@@ -1,6 +1,10 @@
+  .groups {
+    padding: 1rem;
+  }
+
   .groups > div {
     height: 5rem;
-    width: 90%;
+    width: 95%;
     margin-bottom: 1rem;
     padding: .5rem;
     border-radius: .5rem;

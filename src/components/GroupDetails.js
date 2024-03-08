@@ -76,7 +76,7 @@ const GroupDetails = () => {
 
     if (error) return <div>Opps! Something went wrong! <div>{error}</div></div>;
 
-    if (status !== 'completed' && groupExpenseStatus !== 'completed') return <GroupDetailsSkimmer />;
+    if (status !== 'completed' || groupExpenseStatus !== 'completed') return <GroupDetailsSkimmer />;
 
     return (
         <div>

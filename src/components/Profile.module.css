@@ -1,0 +1,68 @@
+.profilePage {
+    height: calc(100dvh - 8rem);
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    padding: 1rem;
+}
+
+.accountSection{
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    padding: 0 0 1rem 1rem;
+    border-bottom: .1rem solid gray;
+}
+
+.profileImg {
+    width: 4rem;
+}
+
+.accountSection span {
+    margin-left: auto;
+    margin-right: 2rem;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.userDetails > div:nth-child(1){
+    font-size: 1.5rem;
+}
+
+.copyright {
+    text-align: center;
+    margin-top: auto;
+}
+
+.feedback {
+    padding: 1rem;
+    border-bottom: .1rem solid gray;
+}
+
+.feedback .header {
+    font-size: 1.5rem;
+}
+
+.feedback > div {
+    display: flex;
+    gap: 1rem;
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+
+.feedback > div:hover {
+    background-color: rgba(128, 128, 128, 0.171);
+}
+
+.logout {
+    font-size: 2rem;
+    color: red;
+    width: fit-content;
+    margin: auto;
+    padding: 0.5rem;
+    border-radius: 1rem;
+    cursor: pointer;
+    background-color: rgba(231, 121, 121, 0.888);
+}
